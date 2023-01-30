@@ -16,10 +16,12 @@
   <body>
     <!-- APLICACION NUEVA -->
 
+    <!--SECCION TITULO PRINCIPAL-->
     <section class="seccion-titulo-principal">
       <h1>SIMULADOR DE <span>OPERACIONES ALEATORIAS</span></h1>
     </section>
 
+    <!--SECCION INPUTS-->
     <section class="seccion-principal">
       <!--CONTENEDORES DE LA INFORMACION-->
       <div class="contenedor contenedor-inputs">
@@ -159,31 +161,49 @@
       </div>
     </section>
 
+    <!--SECCION RESULTADOS DE LA SIMULACION-->
     <section class="seccion-lista-simulaciones">
       <div class="contenedor">
         <div class="contenedor-titulo">
-          <h2>SIMULACION <span>1</span></h2>
+          <h2>SIMULACION <span>n°1</span></h2>
         </div>
         <div class="contenedor-info">
           <!--CONTENEDOR DE ESTADISTICAS-->
           <div class="contenedor contenedor-estadisticas">
             <div class="contenedor-titulo"><h2>Estadisticas</h2></div>
-            <div class="contenedor-info">Aca va toda la info</div>
+            <div class="contenedor-info">
+              <table class>
+                <tr>
+                  <th>n°targets</th>
+                  <th>n°stops</th>
+                </tr>
+                <tr>
+                  <td>55</td>
+                  <td>55</td>
+                </tr>
+              </table>
+              <div>
+                <div>Efectividad</div>
+                <div>Ratio</div>
+                <div>Grafico</div>
+              </div>
+              <div>Aca va la esperanza matematica</div>
+            </div>
             <div class="contenedor-resultado-simulacion">Sistema exitoso</div>
-          </div class="contendor-rachas-drawdown">
+          </div>
           <!--CONTENEDOR DE RACHAS Y DRAWDOWN-->
-          <div>
+          <div class="contendor-rachas-drawdown">
             <div class="contenedor contenedor-rachas">
               <div class="contenedor-titulo"><h2>RACHAS</h2></div>
               <div class="contenedor-info">
-                <table>
+                <table class="tabla-simple">
                   <tr>
                     <th>racha positiva</th>
-                    <td>5</td>
+                    <td class="fila-positiva">5</td>
                   </tr>
                   <tr>
                     <th>racha negativa</th>
-                    <td>7</td>
+                    <td class="fila-negativa">7</td>
                   </tr>
                 </table>
               </div>
@@ -191,17 +211,74 @@
             <div class="contenedor contenedor-drawdown">
               <div class="contenedor-titulo"><h2>DRAWDOWN</h2></div>
               <div class="contenedor-info">
-                <table>
+                <table class="tabla-simple">
                   <tr>
                     <th>maximo drawdown</th>
-                    <td>5</td>
+                    <td class="fila-negativa">5</td>
                   </tr>
                   <tr>
                     <th>dias maximos en drawdown</th>
-                    <td>7</td>
+                    <td class="fila-negativa">7</td>
                   </tr>
                 </table>
               </div>
+            </div>
+          </div>
+          <!--CONTENEDOR MONETARIO-->
+          <div class="contenedor contenedor-monetario">
+            <div class="contenedor-titulo"><h2>Monetario</h2></div>
+            <div class="contenedor-info">
+              <div class="contenedor-info-totales">
+                <div class="contenedor-totales">
+                  <output id="total-targets">$1500,00</output>
+                  <label>total target</label>
+                </div>
+                <div class="contenedor-totales">
+                  <output id="total-stops">$1500,00</output>
+                  <label>total stop</label>
+                </div>
+                <div class="contenedor-totales">
+                  <output id="diff-target-stops">$1500,00</output>
+                  <label>total subtotal</label>
+                </div>
+                <div class="contenedor-totales">
+                  <output id="total-comision">$1500,00</output>
+                  <label>total comisiones</label>
+                </div>
+              </div>
+              <div class="contenedor-info-resultado-final">
+                <div class="contenedor-totales">
+                  <output id="resultado-final">$1500,00</output>
+                  <label>total monto final</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--CONTENEDOR GRAFICA DE ACUMULADO-->
+          <div class="contenedor contenedor-acumulado">
+            <div class="contenedor-titulo"><h2>Acumulado</h2></div>
+            <div class="contenedor-info">
+              Aca estaria la grafica de acumulado
+            </div>
+          </div>
+          <!--CONTENEDOR DE TABLA -->
+          <div class="contenedor contenedor-tabla">
+            <div class="contenedor-titulo"><h2>Tabla</h2></div>
+            <div class="contenedor-info">
+              <table class="contenido-tabla">
+                <thead id="tabla-encabezado">
+                  <tr>
+                    <th>ID</th>
+                    <th>RESULTADO</th>
+                    <th>COMISION</th>
+                    <th>SUBTOTAL</th>
+                    <th>ACUMULADO</th>
+                    <th>DRAWDOWN</th>
+                    <th>+ / -</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-cuerpo"></tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -329,6 +406,8 @@
             <label for="max-dias-drawdown">MAX DIAS EN DRAWDOWN</label>
             <output id="max-dias-drawdown">Maximo dias en drawdown</output>
           </div>
+
+
 
           <div>
             <label for="total-target">TOTAL TARGETS</label>

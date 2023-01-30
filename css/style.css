@@ -200,14 +200,19 @@ footer{
     flex-flow: column wrap;
     justify-items: center;
   }
-  .contenedor-inputs{
+  .contenedor-inputs, 
+  .contenedor-instrucciones,
+  .contenedor-estadisticas,
+  .contenedor-rachas,
+  .contenedor-drawdown,
+  .contenedor-monetario,
+  .contenedor-acumulado,
+  .contenedor-tabla
+  {
     width: 100%;
-
   }
   
-  .contenedor-instrucciones{
-    width: 100%;
-  }
+  
 
 
 
@@ -217,7 +222,7 @@ footer{
 /*BOTON SIMULAR*/
 .btn{
   padding-bottom: 10px;
-  padding: 0 10px
+  padding: 0 20px 20px;
 }
 #btn-simular {
   display: inline-flex;
@@ -263,6 +268,102 @@ footer{
 
 #btn-msj-err{
   color: var(--color-negativo);
+}
+
+/*SECCION DE RESULTADOS DE SIMULACION*/
+
+.seccion-lista-simulaciones .contenedor-info{
+  /*FLEX*/
+  display: flex;
+  flex-flow: row wrap;
+
+}
+
+/*TABLAS SIMPLES PARA EL DRAWDOWN Y LAS RACHAS*/
+.tabla-simple{
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  
+}
+.tabla-simple tr{
+  border-bottom: 1px solid rgba(130, 130, 235, 0.253);
+  font-size: var(--tamaño-letra-m);
+  
+}
+.tabla-simple th{
+  text-transform: uppercase;
+  text-align: left;
+  padding-top: 20px ;
+  padding-bottom: 1px;
+}
+.tabla-simple td{
+  text-align: right;
+  padding-top: 20px ;
+  padding-bottom: 1px;
+  padding-right: 5px;
+}
+.fila-negativa{
+  color:var(--color-negativo);
+}
+.fila-positiva{
+  color: var(--color-positivo);
+}
+
+
+/*CONTENEDOR MONETARIO*/
+ .contenedor-info{
+
+  width: 100%;
+  /*FLEX*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+
+}
+.contenedor-info-totales{
+  margin: 20px 0;
+  /*FLEX*/
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.contenedor-info-resultado-final{
+  /*FLEX*/
+  flex-grow: 1;
+}
+.contenedor-totales{
+  background-color:  #286cff0a;
+  margin: 5px;
+  /*FLEX*/
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  
+}
+#total-targets{
+  color: var(--color-positivo);
+}
+#total-stops{
+  color:  var(--color-negativo)
+}
+#total-comision{
+  color: var(--color-negativo);
+}
+#resultado-final{
+  font-size: var(--tamaño-letra-xxl);
+}
+.contenedor-totales output{
+  margin: 10px;
+  font-size: var(--tamaño-letra-x);
+}
+.contenedor-totales label{
+  margin: 10px;
+  font-size: var(--tamaño-letra-m);
+  text-transform: uppercase;
 }
 
 
