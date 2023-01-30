@@ -3,8 +3,8 @@
   --tamaño-letra-xs: 5px;
   --tamaño-letra-s: 10px; /*Usar en textos normales*/
   --tamaño-letra-m: 15px; /*Usar para subtitulos*/
-  --tamaño-letra-l: 20px; /*Usar para textos de mayor importantcia*/
-  --tamaño-letra-x: 25px; /*Usar para titulos principales*/
+  --tamaño-letra-l: 18px; /*Usar para textos de mayor importantcia*/
+  --tamaño-letra-x: 23px; /*Usar para titulos principales*/
   --tamaño-letra-xl: 30px;
   --tamaño-letra-xxl: 45px;
 
@@ -41,6 +41,9 @@ body {
   text-align: center;
   padding: 10px;
 }
+.seccion-titulo-principal span {
+  color: rgb(223, 160, 82);
+}
 footer{
   background-color: rgba(0, 0, 0, 0.30);
   font-size: var(--tamaño-letra-x);
@@ -64,6 +67,7 @@ footer{
 }
 .contenedor-titulo{
   background-color: rgba(0, 0, 0 , 0.25);
+  text-transform: uppercase;
   font-size: var(--tamaño-letra-m);
   padding: 15px ;
   text-align: center;
@@ -89,11 +93,9 @@ footer{
   align-content: flex-start;
 }
 .input-control {
-  padding: 5px 0px 30px;
+  padding: 5px 0px 35px;
   position: relative;
 }
-
-
 .input-cuerpo {
   display: flex;
   flex-direction: row;
@@ -111,9 +113,6 @@ footer{
   justify-content: center;
   align-items: center;
 }
-
-
-
 
 
 .input-control input {
@@ -140,7 +139,7 @@ footer{
 .input-control span {
   display: none;
   position: absolute;
-  top: -12px;
+  top: 52px;
   right: 0;
   
 }
@@ -152,7 +151,6 @@ footer{
 .input-no-valido span {
   display: block;
  
-  
 }
 .input-no-valido .input-cuerpo div{
   border: 1px solid var(--color-negativo);
@@ -164,8 +162,6 @@ footer{
 }
 
 /*Cuando el imput es valido*/
-
-
 .input-valido {
   color: var(--color-positivo);
 }
@@ -182,53 +178,16 @@ footer{
   color: var(--color-positivo);
 }
 
-/*
-.input-control input:focus ~ label {
-  color: var(--color-label-in);
-}
-.input-control input:focus {
-  border: 1px solid var(--color-input-in);
-}
-
 #ratio-ganancia-perdida {
-  background-color: transparent;
-  width: 100%;
-  border: 1px solid var(--color-input-in);
-  border-radius: 5px;
-  outline: none;
-  padding: 15px;
-  margin: 2px;
-  font-family: "Montserrat", sans-serif;
-  text-align: center;
-  color: #d6e2ed;
-  order: 1;
+  background-color: rgba(0, 0, 0 , 0.2);
+  
 }
 
-#ratio-ganancia-perdida + label {
-  color: var(--color-label-in);
-}
 
-/*MANEJO DE ERROR EN LOS INPUTS*/
-/*
-.input-control input:invalid ~ .msj-error {
-  position: absolute;
-  font-size: var(--tamaño-letra-m);
-  left: 0;
-  color: var(--color-negativo);
-}
-.input-control input:invalid + label {
-  visibility: hidden;
-}
-.input-control input:invalid {
-  color: var(--color-negativo);
-  border: 1px solid var(--color-negativo);
-}
 
-.input-control input:valid ~ .msj-error {
-  display: none;
-}
 
-*/
+
+
 
 .contenedor-instrucciones{
   width: 55vw;
@@ -250,15 +209,61 @@ footer{
     width: 100%;
   }
 
-  .input-no-valido label {
-    visibility: hidden;
-  }
+
 
 }
 
 
+/*BOTON SIMULAR*/
+.btn{
+  padding-bottom: 10px;
+  padding: 0 10px
+}
+#btn-simular {
+  display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 40px;
+	background: #141414;
+	color: var(--color-letra);
+	font-size: var(--tamaño-letra-l);
+	font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+	border: none;
+	cursor: pointer;
+	text-transform: uppercase;
+	transition: .3s ease all;
+	border-radius: 5px;
+	position: relative;
+	overflow: hidden;
+}
+#btn-simular span {
+	position: relative;
+	z-index: 2;
+	transition: .3s ease all;
+}
 
+#btn-simular::after {
+	content: "";
+  
+	width: 100%;
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: calc(-100% - 80px);
+	border-bottom: 80px solid #286cff;
+	border-right: 80px solid transparent;
+	transition: .4s ease-in-out all;
+}
 
+#btn-simular:hover::after {
+	left: 0;
+}
+
+#btn-msj-err{
+  color: var(--color-negativo);
+}
 
 
 

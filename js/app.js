@@ -18,24 +18,23 @@ function Config() {
   };
 }
 
-/**
- * Generacion de la simulacion
- * Esto lo que retorna es la lista de trades
- */
 
-ElmntHTML.botonSimular.addEventListener("click", crearSimulacion);
 
 //Validamos los datos de entrada
+let err = [];
 function validar(elementoHTML) {
   if (elementoHTML.id == "num-de-trades") {
-    if (elementoHTML.value === null || elementoHTML.value <= 0) {
+    if (elementoHTML.value === null || elementoHTML.value <= 0 ||
+      !(elementoHTML.value % 1 === 0)) {
       document.getElementById("input-1").classList.remove("input-valido");
       document.getElementById("input-1").classList.add("input-no-valido");
       document.getElementById("msj-error-1").innerHTML =
-        "El valor no puede ser nulo o estar vacio";
+        "*El valor no puede ser nulo o estar vacio";
+      err[0] = 1;
     } else {
       document.getElementById("input-1").classList.remove("input-no-valido");
       document.getElementById("input-1").classList.add("input-valido");
+      err[0] = 0;
     }
   }
 
@@ -44,10 +43,12 @@ function validar(elementoHTML) {
       document.getElementById("input-2").classList.remove("input-valido");
       document.getElementById("input-2").classList.add("input-no-valido");
       document.getElementById("msj-error-2").innerHTML =
-        "El valor no puede ser nulo o ser positivo";
+        "*El valor no puede ser nulo o ser positivo";
+      err[1] = 1;
     } else {
       document.getElementById("input-2").classList.remove("input-no-valido");
       document.getElementById("input-2").classList.add("input-valido");
+      err[1] = 0;
     }
   }
 
@@ -56,10 +57,12 @@ function validar(elementoHTML) {
       document.getElementById("input-3").classList.remove("input-valido");
       document.getElementById("input-3").classList.add("input-no-valido");
       document.getElementById("msj-error-3").innerHTML =
-        "El valor no puede ser nulo o ser negativo";
+        "*El valor no puede ser nulo o ser negativo";
+      err[2] = 1;
     } else {
       document.getElementById("input-3").classList.remove("input-no-valido");
       document.getElementById("input-3").classList.add("input-valido");
+      err[2] = 0;
     }
   }
 
@@ -68,70 +71,93 @@ function validar(elementoHTML) {
       document.getElementById("input-4").classList.remove("input-valido");
       document.getElementById("input-4").classList.add("input-no-valido");
       document.getElementById("msj-error-4").innerHTML =
-        "El valor no puede ser nulo o ser negativo";
+        "*El valor no puede ser nulo o ser negativo";
+      err[3] = 1;
     } else {
       document.getElementById("input-4").classList.remove("input-no-valido");
       document.getElementById("input-4").classList.add("input-valido");
+      err[3] = 0;
     }
   }
 
   if (elementoHTML.id == "efectividad") {
-    if (elementoHTML.value === null || elementoHTML.value < 0 || elementoHTML.value > 1) {
+    if (
+      elementoHTML.value === null ||
+      elementoHTML.value < 0 ||
+      elementoHTML.value > 1
+    ) {
       document.getElementById("input-5").classList.remove("input-valido");
       document.getElementById("input-5").classList.add("input-no-valido");
       document.getElementById("msj-error-5").innerHTML =
-      "Tiene que ingresar un valor entre 0 y 1";
+        "*Tiene que ingresar un valor entre 0 y 1";
+      err[4] = 1;
     } else {
       document.getElementById("input-5").classList.remove("input-no-valido");
       document.getElementById("input-5").classList.add("input-valido");
+      err[4] = 0;
     }
   }
 
   if (elementoHTML.id == "num-de-simulaciones") {
-    if (elementoHTML.value === null || elementoHTML.value <= 0 || !(elementoHTML.value % 1 === 0)) {
+    if (
+      elementoHTML.value === null ||
+      elementoHTML.value <= 0 ||
+      !(elementoHTML.value % 1 === 0)
+    ) {
       document.getElementById("input-6").classList.remove("input-valido");
       document.getElementById("input-6").classList.add("input-no-valido");
       document.getElementById("msj-error-6").innerHTML =
-      "El valor debe ser un numero entero mayor a 0";
+        "*El valor debe ser un numero entero mayor a 0";
+      err[5] = 1;
     } else {
       document.getElementById("input-6").classList.remove("input-no-valido");
       document.getElementById("input-6").classList.add("input-valido");
+      err[5] = 0;
     }
   }
-  /*
-
-  }
-  if (ElmntHTML.montoTakeProfit.value === null || ElmntHTML.montoTakeProfit.value < 0) {
-    
-    throw new Error("El valor no puede ser nulo o ser negativo");
-  }
-  if (ElmntHTML.comisionPorTrade.value === null || ElmntHTML.comisionPorTrade.value < 0) {
-    
-    throw new Error("El valor no puede ser nulo o ser negativo");
-  }
-  if (ElmntHTML.comisionPorTrade.value === null || ElmntHTML.comisionPorTrade.value > 1) {
-   
-    throw new Error("Tiene que ingresar un valor entre 0 y 1");
-  }
-  
-*/
 }
 
+function comprobarErrorInput() {
+  let i = 0;
+  err.forEach((e) => {
+    if (e === 0) {
+      i++;
+    }
+  });
+  if (i < 6) {
+    throw new Error("Error - Revisar que los campos esten correctamente");
+  }
+}
+
+/**
+ * Generacion de la simulacion
+ * Esto lo que retorna es la lista de trades
+ */
+
+ElmntHTML.botonSimular.addEventListener("click", crearSimulacion);
+
+
 function crearSimulacion() {
-  
-    const simulacion = new Simulacion();
-    const listaTrades = simulacion.listaTrades();
-    const simulacionResultados = new SimulacionResultados(listaTrades);
 
-    mostrarResultados(simulacionResultados);
-    mostrarTabla(listaTrades);
-    /*mostrarGrafico(listaTrades);*/
-    mostrarGraficoEfectividad(simulacionResultados);
+  try {
+    comprobarErrorInput();
+    document.getElementById('btn-msj-err').innerHTML = "";
+  } catch (error) {
+    document.getElementById('btn-msj-err').innerHTML = error.message;
+    throw new Error();
+  }
+  const simulacion = new Simulacion();
+  const listaTrades = simulacion.listaTrades();
+  const simulacionResultados = new SimulacionResultados(listaTrades);
 
-    console.log(simulacionResultados.esperanzaMatematica());
-    console.log(simulacionResultados.gananciaPromedio());
-    console.log(simulacionResultados.perdidaPromedio());
-  
+  mostrarResultados(simulacionResultados);
+  mostrarTabla(listaTrades);
+  /*mostrarGrafico(listaTrades);*/
+  mostrarGraficoEfectividad(simulacionResultados);
+
+  console.log(simulacionResultados.esperanzaMatematica());
+  console.log(simulacionResultados.gananciaPromedio());
+  console.log(simulacionResultados.perdidaPromedio());
 }
 
 /*
@@ -217,16 +243,12 @@ function formatoMoneda(valor) {
 }
 
 function mostrarRatio() {
-  ElmntHTML.ratioGP.value = Math.abs(
+  ElmntHTML.ratioGP.value = `${Math.abs(
     ElmntHTML.montoTakeProfit.value / ElmntHTML.montoStopLoss.value
-  );
-  console.log('se esta ejecutando esto');
+  ).toFixed(2)} : 1`;
 }
 
-/*
-ElmntHTML.montoTakeProfit.onchange = mostrarRatio;
-ElmntHTML.montoStopLoss.onchange = mostrarRatio;
-*/
+
 /**
  * Logica para mostrar los datos en una grafica
  */

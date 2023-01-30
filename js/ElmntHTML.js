@@ -7,6 +7,7 @@ class ElmntHTML {
   static comisionPorTrade = document.getElementById("comision");
   static ratioGP = document.getElementById("ratio-ganancia-perdida");
   static efectividad = document.getElementById("efectividad");
+  static numDeSimulaciones = document.getElementById('num-de-simulaciones');
   static botonSimular = document.getElementById("btn-simular");
   static body = document.getElementsByTagName('body')[0];
 
