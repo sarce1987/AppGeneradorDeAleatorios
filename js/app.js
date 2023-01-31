@@ -1,7 +1,7 @@
 /**
  * Al arrancar el programa
  */
-/*ElmntHTML.body.onload = mostrarGraficoEfectividadInicio;*/
+ElmntHTML.body.onload = mostrarGraficoEfectividadInicio;
 
 /**
  * Seteo de valores de configuracion a traves de los valores del imput
@@ -18,14 +18,15 @@ function Config() {
   };
 }
 
-
-
 //Validamos los datos de entrada
 let err = [];
 function validar(elementoHTML) {
   if (elementoHTML.id == "num-de-trades") {
-    if (elementoHTML.value === null || elementoHTML.value <= 0 ||
-      !(elementoHTML.value % 1 === 0)) {
+    if (
+      elementoHTML.value === null ||
+      elementoHTML.value <= 0 ||
+      !(elementoHTML.value % 1 === 0)
+    ) {
       document.getElementById("input-1").classList.remove("input-valido");
       document.getElementById("input-1").classList.add("input-no-valido");
       document.getElementById("msj-error-1").innerHTML =
@@ -136,14 +137,12 @@ function comprobarErrorInput() {
 
 ElmntHTML.botonSimular.addEventListener("click", crearSimulacion);
 
-
 function crearSimulacion() {
-
   try {
     comprobarErrorInput();
-    document.getElementById('btn-msj-err').innerHTML = "";
+    document.getElementById("btn-msj-err").innerHTML = "";
   } catch (error) {
-    document.getElementById('btn-msj-err').innerHTML = error.message;
+    document.getElementById("btn-msj-err").innerHTML = error.message;
     throw new Error();
   }
   const simulacion = new Simulacion();
@@ -248,7 +247,6 @@ function mostrarRatio() {
   ).toFixed(2)} : 1`;
 }
 
-
 /**
  * Logica para mostrar los datos en una grafica
  */
@@ -278,7 +276,7 @@ function mostrarRatio() {
 }*/
 
 /*GRAFICA DE EFICIENCIA */
-var graficoEficiencia = null;
+var graficoEfectividad = null;
 function mostrarGraficoEfectividad(simulacionResultados) {
   const ctx = ElmntHTML.graficoEfectividad;
   const datos = [
@@ -286,41 +284,54 @@ function mostrarGraficoEfectividad(simulacionResultados) {
     (1 - simulacionResultados.efectividad()) * 100,
   ];
 
-  if (graficoEficiencia != null) {
-    graficoEficiencia.destroy();
+  if (graficoEfectividad != null) {
+    graficoEfectividad.destroy();
   }
 
-  graficoEficiencia = new Chart(ctx, {
+  graficoEfectividad = new Chart(ctx, {
     type: "doughnut",
     data: {
       labels: ["Positivos", "Negativos"],
       datasets: [
         {
           label: "#",
-          data: datos,
+          data: [55, 45],
           borderWidth: 1,
+
           backgroundColor: ["#58D68D", "#E74C3C"],
         },
       ],
     },
     options: {
-      scales: {
-        y: {
-          beginAtZero: true,
+      animation: false,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          enabled: false,
         },
       },
     },
   });
 }
 function mostrarGraficoEfectividadInicio() {
-  const ctx = ElmntHTML.graficoEfectividad;
-  const datos = [0, 100];
+  const ctx = ElmntHTML.graficoEfectividad.getContext("2d");
+  const datos = [55, 45];
 
-  if (graficoEficiencia != null) {
-    graficoEficiencia.destroy();
+  if (graficoEfectividad != null) {
+    graficoEfectividad.destroy();
   }
 
-  graficoEficiencia = new Chart(ctx, {
+  let gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
+  gradientStroke1.addColorStop(0, "rgba(59, 94, 146 , 1)");
+  gradientStroke1.addColorStop(1, "rgba(88, 126, 155 , 1)");
+
+  let gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
+  gradientStroke2.addColorStop(0, "rgba(179, 72, 72 , 1)");
+  gradientStroke2.addColorStop(1, "rgba(220, 98, 98, 1)");
+
+  graficoEfectividad = new Chart(ctx, {
     type: "doughnut",
     data: {
       labels: ["Positivos", "Negativos"],
@@ -328,15 +339,23 @@ function mostrarGraficoEfectividadInicio() {
         {
           label: "#",
           data: datos,
-          borderWidth: 1,
-          backgroundColor: ["#58D68D", "#E74C3C"],
+          borderWidth: 0,
+          backgroundColor:[
+            gradientStroke1,
+            gradientStroke2
+        ],
+          borderColor: "#1e2128100",
         },
       ],
     },
     options: {
-      scales: {
-        y: {
-          beginAtZero: true,
+      animation: true,
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          enabled: false,
         },
       },
     },

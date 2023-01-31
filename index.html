@@ -172,27 +172,36 @@
           <div class="contenedor contenedor-estadisticas">
             <div class="contenedor-titulo"><h2>Estadisticas</h2></div>
             <div class="contenedor-info">
-              <table class>
+
+              <table class="contenido-tabla">
+                <thead id="tabla-encabezado">
+                  <tr>
+                    <th>n°targets</th>
+                    <th>n°stops</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-cuerpo"></tbody>
                 <tr>
-                  <th>n°targets</th>
-                  <th>n°stops</th>
+                  <td id="val-1">1</td>
+                  <td id="val-2">75</td>
                 </tr>
-                <tr>
-                  <td>55</td>
-                  <td>55</td>
-                </tr>
+               
               </table>
-              <div>
-                <div>Efectividad</div>
-                <div>Ratio</div>
-                <div>Grafico</div>
+             
+              <div class="contenedor-grafica-efectividad">
+                <div class="centro-grafico">
+                  <div id="centro-efectividad">50%</div>
+                  <div id="centro-ratio">1:20</div>
+                </div>
+                
+                <div><canvas id="efectividadChart" ></canvas></div>
               </div>
-              <div>Aca va la esperanza matematica</div>
+              <div class="esperanza-mat">Esperanza matematica: <span id="esperanza-matematica">2.54</span></div>
             </div>
-            <div class="contenedor-resultado-simulacion">Sistema exitoso</div>
+            <div class="contenedor-resultado-simulacion-negativo">Sistema exitoso</div>
           </div>
           <!--CONTENEDOR DE RACHAS Y DRAWDOWN-->
-          <div class="contendor-rachas-drawdown">
+          <div class="contenedor-rachas-drawdown">
             <div class="contenedor contenedor-rachas">
               <div class="contenedor-titulo"><h2>RACHAS</h2></div>
               <div class="contenedor-info">
@@ -217,7 +226,7 @@
                     <td class="fila-negativa">5</td>
                   </tr>
                   <tr>
-                    <th>dias maximos en drawdown</th>
+                    <th>max dias en drawdown</th>
                     <td class="fila-negativa">7</td>
                   </tr>
                 </table>
@@ -239,7 +248,7 @@
                 </div>
                 <div class="contenedor-totales">
                   <output id="diff-target-stops">$1500,00</output>
-                  <label>total subtotal</label>
+                  <label>subtotal</label>
                 </div>
                 <div class="contenedor-totales">
                   <output id="total-comision">$1500,00</output>
@@ -249,9 +258,10 @@
               <div class="contenedor-info-resultado-final">
                 <div class="contenedor-totales">
                   <output id="resultado-final">$1500,00</output>
-                  <label>total monto final</label>
+                  <label>monto final</label>
                 </div>
               </div>
+              
             </div>
           </div>
           <!--CONTENEDOR GRAFICA DE ACUMULADO-->
@@ -277,7 +287,35 @@
                     <th>+ / -</th>
                   </tr>
                 </thead>
+                  
                 <tbody id="tabla-cuerpo"></tbody>
+                <tr class="fila-positiva">
+                  <td>1</td>
+                  <td>75</td>
+                  <td>1</td>
+                  <td>74</td>
+                  <td>74</td>
+                  <td>0</td>
+                  <td>POSITIVO</td>
+                </tr>
+                <tr class="fila-negativa">
+                  <td>1</td>
+                  <td>75</td>
+                  <td>1</td>
+                  <td>74</td>
+                  <td>74</td>
+                  <td>0</td>
+                  <td>POSITIVO</td>
+                </tr>
+                <tr>
+                  <td>1</td>
+                  <td>75</td>
+                  <td>1</td>
+                  <td>74</td>
+                  <td>74</td>
+                  <td>0</td>
+                  <td>POSITIVO</td>
+                </tr>
               </table>
             </div>
           </div>
@@ -459,6 +497,7 @@
         </table>
       </section>
     </div> -->
+
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/ElmntHTML.js"></script>

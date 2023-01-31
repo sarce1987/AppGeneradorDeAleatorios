@@ -30,5 +30,5 @@ class ElmntHTML {
   
   //Graficos
   static grafico = document.getElementById('myChart');
-  static graficoEfectividad = document.getElementById('efectividadChart')
+  static graficoEfectividad = document.getElementById('efectividadChart');
 }

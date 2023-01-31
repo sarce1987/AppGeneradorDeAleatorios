@@ -196,18 +196,18 @@ footer{
 }
 
 @media screen and (max-width: 990px){
-  .seccion-principal{
+  .seccion-principal,
+  .seccion-lista-simulaciones .contenedor .contenedor-info
+  {
     flex-flow: column wrap;
     justify-items: center;
   }
+ 
+ 
   .contenedor-inputs, 
   .contenedor-instrucciones,
-  .contenedor-estadisticas,
-  .contenedor-rachas,
-  .contenedor-drawdown,
-  .contenedor-monetario,
-  .contenedor-acumulado,
-  .contenedor-tabla
+  .seccion-lista-simulaciones .contenedor .contenedor-info .contenedor,
+  .seccion-lista-simulaciones .contenedor .contenedor-info .contenedor-rachas-drawdown
   {
     width: 100%;
   }
@@ -276,9 +276,95 @@ footer{
   /*FLEX*/
   display: flex;
   flex-flow: row wrap;
+  justify-content: start;
 
 }
 
+
+
+/*CONTENEDOR ESTADISTICAS*/
+
+.contenedor-estadisticas{
+  width: 350px;
+
+
+}
+.contenedor-estadisticas .contenedor-info{
+  /*FLEX*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.contenedor-estadisticas .contenido-tabla{
+  padding: 0;
+  width: 100%;
+  text-transform: uppercase;
+}
+
+.contenido-tabla #val-1{
+  color: var(--color-positivo);
+}
+.contenido-tabla #val-2{
+  color: var(--color-negativo);
+}
+
+.contenedor-grafica-efectividad{
+  
+  width: 200px;
+  height: 200px;
+  position: relative;
+
+}
+
+/*Centrado dentro del grafico*/
+.centro-grafico{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+#centro-efectividad{
+  font-size: var(--tamaño-letra-x);
+}
+
+.esperanza-mat{
+  padding-top: 10px;
+}
+
+.contenedor-resultado-simulacion-positivo{
+  background-color: var(--color-positivo);
+  color: #141414;
+  font-size: var(--tamaño-letra-l);
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+}
+.contenedor-resultado-simulacion-negativo{
+  background-color: var(--color-negativo);
+  color: #141414;
+  font-size: var(--tamaño-letra-l);
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+}
+
+
+/*CONTENEDOR DE RACHAS Y DRAWDOWN*/
+.contenedor-rachas-drawdown{
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+.contenedor-rachas-drawdown .contenedor{
+  height: 50%;
+}
 /*TABLAS SIMPLES PARA EL DRAWDOWN Y LAS RACHAS*/
 .tabla-simple{
   width: 100%;
@@ -310,27 +396,25 @@ footer{
   color: var(--color-positivo);
 }
 
-
 /*CONTENEDOR MONETARIO*/
- .contenedor-info{
-
-  width: 100%;
+ .contenedor-monetario .contenedor-info{
   /*FLEX*/
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-
 }
 .contenedor-info-totales{
-  margin: 20px 0;
-  /*FLEX*/
   width: 100%;
+  /*FLEX*/
+ 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+
 .contenedor-info-resultado-final{
+  height: 50%;
   /*FLEX*/
   flex-grow: 1;
 }
@@ -365,6 +449,46 @@ footer{
   font-size: var(--tamaño-letra-m);
   text-transform: uppercase;
 }
+
+/*CONTENEDOR ACUMULADO*/
+.contenedor-acumulado{
+
+}
+
+/*CONTENEDOR TABLA*/
+.contenedor-tabla{
+  width: 100%;
+}
+.contenido-tabla {
+  border-collapse: collapse;
+  margin: 20px 0px;
+  font-size: 0.9em;
+  width: 100%;
+}
+.contenido-tabla thead tr {
+  background-color: #3b43727a;
+  font-weight: bold;
+  text-align: center;
+}
+.contenido-tabla th,
+.contenido-tabla td {
+  padding: 7px;
+}
+
+.contenido-tabla tbody tr {
+  text-align: center;
+  border-bottom: 1px solid rgba(130, 130, 235, 0.253);
+  background-color: #7495cb13;
+}
+
+.fila-positiva {
+  color: #27ae60;
+}
+
+.fila-negativa {
+  color: #e74c3c;
+}
+
 
 
 
@@ -453,24 +577,7 @@ footer{
   color: #e74c3c;
 }
 
-#btn-simular {
-  padding: 10px;
-  font-weight: bold;
-  background-color: rgba(0, 255, 76, 0.6);
-  color: #cacfd4;
-  border: none;
-  border-radius: 3px;
-  margin: 25px 10px 0;
-}
-
-#btn-simular:hover {
-  background-color: rgba(0, 255, 76, 0.1);
-  border: 1px solid rgba(0, 255, 76, 0.6);
-  color: rgba(0, 255, 76, 0.6);
-}
-
-#btn-simular:active {
-  scale: 0.8;
+: 0.8;
 }
 
 .grafico-eficiencia {
