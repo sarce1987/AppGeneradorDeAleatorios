@@ -424,6 +424,7 @@ footer{
 
 
 
+
 .contenedor-totales{
   width: 20%;
   background-color:  #286cff0a;
@@ -434,6 +435,12 @@ footer{
   flex-direction: column;
   flex-grow: 1;
   align-items: center;
+}
+
+@media screen and (max-width: 600px){
+  .contenedor-totales{
+    width: 100%;
+  }
 }
 
 .contenedor-info-resultado-final .contenedor-totales{
@@ -522,123 +529,37 @@ footer{
   color: #e74c3c;
 }
 
-
-
-
-/*
-.container-principal {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: stretch;
-}
-
-.titulo-secciones {
-  color: var(--color-titulos-h2);
-  border-bottom: 1px solid var(--color-titulos-h2);
-  text-align: center;
-  padding-bottom: 15px;
-  font-size: small;
-}
-
-.secciones {
-  background-color: var(--color-backgound-secciones);
-  box-shadow: 5px 5px 10px -5px black;
-  border-radius: 20px;
-  margin: 15px;
-  padding: 20px 50px;
-}
-
-.seccion-titulo {
-  height: 100px;
-  width: 100%;
-  background: linear-gradient(to right, #4d5656, #1b2631);
-  display: flex;
-  align-content: center;
-  justify-content: center;
-}
-
-.seccion-titulo h1 {
-  padding: 10px;
-  font-size: 40px;
-  text-align: center;
-  margin: auto;
+/*Para hacer la tabla responsibe*/ /*OJO CON ESTAS LINEAS NO HACEN NADA ()HASTA LA 535*/
+@media screen and (max-width: 800px){
+ 
+  .tabla-operaciones{
+    overflow-x: scroll;
+  }
+  .contenedor-tabla{
+    display: none;
+  }
 }
 
 
 
-.seccion-resultado {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
-}
-.seccion-tabla {
-  flex-grow: 2;
-  width: 100%;
+/*Retraer tabla o ampliar tabla*/
+.tabla-retraida tbody tr:nth-child(n+5) {
+  display: none;
 }
 
-.contenido-tabla {
-  border-collapse: collapse;
-  margin: 25px, 0px;
-  font-size: 0.9em;
-  width: 100%;
+
+.btn-ampliar{
+  width: 30px;
+  height: 30px;
+  font-size: var(--tamaño-letra-l);
+  color: var(--color-letra);
+  border: none;
+  border-radius: 3px;
+  background-color: rgba(156, 156, 156, 0.445);
+  transition: 0.2s;
+}
+.btn-ampliar:hover{
+  background-color: rgba(56, 56, 163, 0.507);
+  cursor: pointer;
 }
 
-.contenido-tabla thead tr {
-  background-color: #585f87;
-  font-weight: bold;
-  text-align: center;
-}
-
-.contenido-tabla th,
-.contenido-tabla td {
-  padding: 12px;
-}
-
-.contenido-tabla tbody tr {
-  text-align: center;
-  border-bottom: 1px solid #d6e2ed;
-  background-color: #212136;
-}
-
-.fila-positiva {
-  color: #27ae60;
-}
-
-.fila-negativa {
-  color: #e74c3c;
-}
-
-: 0.8;
-}
-
-.grafico-eficiencia {
-  width: 150px;
-}
-
-.positivo {
-  background-color: #abebc6;
-  font-size: 12px;
-  color: #186a3b;
-  font-weight: bold;
-  font-size: 20px;
-  text-transform: uppercase;
-  padding: 5px;
-  text-align: center;
-  width: max;
-  font-weight: bold;
-}
-
-.negativo {
-  background-color: #f5b7b1;
-  color: #943126;
-  font-weight: bold;
-  font-size: 20px;
-  text-transform: uppercase;
-  padding: 5px;
-  text-align: center;
-  width: max;
-  font-weight: bold;
-}
-*/

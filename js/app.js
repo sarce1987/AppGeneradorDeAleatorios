@@ -1,10 +1,8 @@
 /**
  * Al arrancar el programa
  */
-ElmntHTML.body.onload = mostrarGraficoAcumulado;
 //ElmntHTML.body.onclick = mostrarGraficoEfectividadInicio;
 
-console.log(formatoPorcentaje(0.54654656));
 
 /**
  * Seteo de valores de configuracion a traves de los valores del imput
@@ -215,7 +213,7 @@ function mostrarDatosSeccionListaSimulaciones(simulacionesResultados) {
               )}</div>
               <div id="centro-ratio">${Math.abs(
                 ElmntHTML.montoTakeProfit.value / ElmntHTML.montoStopLoss.value
-              ).toFixed(2) } : 1</div>
+              ).toFixed(2)} : 1</div>
             </div>
             
             <div><canvas id="efectividadChart-${i}" ></canvas></div>
@@ -296,8 +294,8 @@ function mostrarDatosSeccionListaSimulaciones(simulacionesResultados) {
           <div class="contenedor-info-resultado-final">
             <div class="contenedor-totales">
               <output id="resultado-final-${i}">${formatoMoneda(
-                result.resultadoFinal()
-              )}</output>
+      result.resultadoFinal()
+    )}</output>
               <label>monto final</label>
             </div>
           </div>
@@ -308,14 +306,14 @@ function mostrarDatosSeccionListaSimulaciones(simulacionesResultados) {
       <div class="contenedor contenedor-acumulado">
         <div class="contenedor-titulo"><h2>Acumulado</h2></div>
         <div class="contenedor-info">
-          <canvas id="acumuladoChart"></canvas>
+          <canvas id="acumuladoChart-${i}"></canvas>
         </div>
       </div>
       <!--CONTENEDOR DE TABLA -->
       <div class="contenedor contenedor-tabla">
         <div class="contenedor-titulo"><h2>Tabla</h2></div>
         <div class="contenedor-info">
-          <table class="contenido-tabla">
+          <table id="tabla-operaciones-${i}" class="contenido-tabla tabla-retraida">
             <thead id="tabla-encabezado">
               <tr>
                 <th>ID</th>
@@ -332,16 +330,14 @@ function mostrarDatosSeccionListaSimulaciones(simulacionesResultados) {
               ${mostrarTabla(result.listTrades)}
             </tbody>
           </table>
+          <button id="show-less-more-${i}" class="btn-ampliar" onclick="ocultarMostrarTabla(${i})">+</button>
         </div>
       </div>
     </div>
   </div>`;
-
   }
   document.getElementsByClassName("seccion-lista-simulaciones")[0].innerHTML =
     codigoHTML;
-
-
 }
 
 /*
@@ -440,38 +436,35 @@ function mostrarRatio() {
 }
 
 function comprobarSistema(simulacionesResultados) {
-  
-  simulacionesResultados.forEach((simulacionResultado , i)=>{
+  simulacionesResultados.forEach((simulacionResultado, i) => {
     if (simulacionResultado.esperanzaMatematica() > 0) {
-      document.getElementById(`contenedor-resultado-simulacion-${i+1}`).className =
-        "contenedor-resultado-simulacion-positivo";
-      document.getElementById(`resultado-final-${i+1}`)  .className = 'resultado-final-positivo';
+      document.getElementById(
+        `contenedor-resultado-simulacion-${i + 1}`
+      ).className = "contenedor-resultado-simulacion-positivo";
+      document.getElementById(`resultado-final-${i + 1}`).className =
+        "resultado-final-positivo";
     } else {
-      document.getElementById(`contenedor-resultado-simulacion-${i+1}`).className =
-        "contenedor-resultado-simulacion-negativo";
-        document.getElementById(`resultado-final-${i+1}`)  .className = 'resultado-final-negativo';
+      document.getElementById(
+        `contenedor-resultado-simulacion-${i + 1}`
+      ).className = "contenedor-resultado-simulacion-negativo";
+      document.getElementById(`resultado-final-${i + 1}`).className =
+        "resultado-final-negativo";
     }
-  })
-
-  
+  });
 }
 
 /**
  * Logica para mostrar los datos en una grafica
  */
 
-
-function crearGraficosAcumulado() {
+function crearGraficosAcumulado(simulacionesResultados) {
   const chartsAcumulado = [];
-  i=0;
-  for (let simulacionResultado of simulacionesResultados){
-    let ctx = document
-      .getElementById(`acumuladoChart-${++i}`)
-      .getContext("2d");
-    let data1 = simulacionResultado.listTrades.map((trade => trade.resultado));
-    let data2 = simulacionResultado.listTrades.map((trade => trade.drawdown));
-    let labels = simulacionResultado.listTrades.map((trade => trade.id));
-    ;
+  i = 0;
+  for (let simulacionResultado of simulacionesResultados) {
+    let ctx = document.getElementById(`acumuladoChart-${++i}`).getContext("2d");
+    let data1 = simulacionResultado.listTrades.map((trade) => trade.acumulado);
+    let data2 = simulacionResultado.listTrades.map((trade) => trade.drawdown);
+    let labels = simulacionResultado.listTrades.map((trade) => trade.id);
     grafico = new Chart(ctx, {
       data: {
         datasets: [
@@ -489,10 +482,10 @@ function crearGraficosAcumulado() {
         labels: labels,
       },
       options: {
-        animation: false,
+        animation: true,
         plugins: {
           legend: {
-            display: false,
+            display: true,
           },
           tooltip: {
             enabled: false,
@@ -560,4 +553,32 @@ function crearGraficosEfectividad(simulacionesResultados) {
   }
 
   return chartsEfectividad;
+}
+
+/*Boton de la tabla */
+let showMore = document.getElementById("show-more");
+let showLess = document.getElementById("show-less-1");
+
+showMore.addEventListener("click", function () {
+  let table = document.getElementById("tabla-operaciones-1");
+  let rows = table.querySelectorAll("tbody tr");
+
+  
+  for (let i = 10; i < rows.length; i++) {
+    rows[i].style.display = "table-row";
+  }
+  showMore.style.display = "none";
+});
+
+
+function ocultarMostrarTabla(i){
+  btn = document.getElementById(`show-less-more-${i}`)
+  elmnt = document.getElementById(`tabla-operaciones-${i}`)
+  if(elmnt.classList.contains('tabla-retraida')){
+    elmnt.classList.remove("tabla-retraida");
+    btn.innerHTML = '-';
+  }else{
+    elmnt.classList.add("tabla-retraida");
+    btn.innerHTML = '+'
+  }
 }

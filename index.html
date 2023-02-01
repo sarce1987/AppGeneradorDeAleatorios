@@ -275,7 +275,7 @@
           <div class="contenedor contenedor-tabla">
             <div class="contenedor-titulo"><h2>Tabla</h2></div>
             <div class="contenedor-info">
-              <table class="contenido-tabla">
+              <table id="tabla-operaciones" class="contenido-tabla">
                 <thead id="tabla-encabezado">
                   <tr>
                     <th>ID</th>
@@ -319,6 +319,7 @@
                 </tbody>
                 
               </table>
+              <button id="show-more" class="btn-ampliar">-</button>
             </div>
           </div>
         </div>
@@ -327,180 +328,13 @@
       
     </section>
 
-    <footer class="footer">este es el pie de pagina</footer>
+    <footer class="footer">
+      <p>todos los derechos reservados 
+        aplicacione creada por 
+        Carlos Sebastian Arce</p>
+    </footer>
 
-    <!--
-     APLICACION VIEJA
-    <div class="container-principal">
-      <section class="seccion-titulo">
-        <h1>Generador de operaciones aleatorios</h1>
-      </section>
-
-      <section class="secciones seccion-formulario">
-        <div class="titulo-secciones"><h2>DATOS PARA LA SIMULACION</h2></div>
-        <form action="" id="formulario">
-          <div class="input-control">
-            <input
-              type="number"
-              name=""
-              id="num-de-trades"
-              placeholder="Ingrese la cantidad de trades a simular"
-              required
-            />
-            <label for="num-de-trades">N° Trades</label>
-          </div>
-
-          <div class="input-control">
-            <input
-              type="number"
-              name=""
-              id="monto-stoplost"
-              placeholder="Ingrese el monto en valores negativos"
-              step="0.01"
-              required
-            />
-            <label for="monto-stoplost">Stop Loss</label>
-          </div>
-
-          <div class="input-control">
-            <input
-              type="number"
-              name=""
-              id="monto-take-profit"
-              placeholder="Ingrese el monto en valores positivos"
-              step="0.01"
-              required
-            />
-            <label for="monto-take-profit">Take Profit</label>
-          </div>
-
-          <div class="input-control">
-            <output id="ratio-ganancia-perdida">0</output>
-            <label for="ratio-ganancia-perdida">Ratio G/P</label>
-          </div>
-
-          <div class="input-control">
-            <input
-              type="number"
-              name=""
-              id="comision"
-              step="0.01"
-              placeholder="Ingrese el monto de la comision en valores positivos"
-              required
-            />
-            <label for="comision">Comision</label>
-          </div>
-
-          <div class="input-control">
-            <input
-              type="number"
-              name=""
-              id="efectividad"
-              step="0.01"
-              placeholder="Ingrese la efectividad entre 0 y 1"
-              required
-            />
-            <label for="efectividad">Efectividad</label>
-          </div>
-        </form>
-
-        <button id="btn-simular">SIMULAR</button>
-      </section>
-
-      <section class="secciones seccion-resultado">
-        <div class="titulo-secciones"><h2>RESULTADOS</h2></div>
-        <div class="container-resultados">
-          <div>
-            <label for="num-targets">N° TARGETS</label>
-            <output id="num-targets">Target</output>
-          </div>
-
-          <div>
-            <label for="num-stops">N° STOPS</label>
-            <output id="num-stops">Stops</output>
-          </div>
-
-          <div class="grafico-eficiencia" width="10px">
-            <canvas id="efectividadChart"></canvas>
-          </div>
-
-          <div>
-            <label for="efectividad-sistema">EFECTIVIDAD %</label>
-            <output id="efectividad-sistema">Efectividad Procentual</output>
-          </div>
-
-          <div>
-            <label for="max-racha-pos">MAX RACHA POSITIVA</label>
-            <output id="max-racha-pos">Maxima racha positiva</output>
-          </div>
-
-          <div>
-            <label for="max-racha-neg">MAX RACHA NEGATIVA</label>
-            <output id="max-racha-neg">Maxima racha negativa</output>
-          </div>
-
-          <div>
-            <label for="max-drawdown">MAX DRAWDOWN</label>
-            <output id="max-drawdown">Maximo drawdown</output>
-          </div>
-
-          <div>
-            <label for="max-dias-drawdown">MAX DIAS EN DRAWDOWN</label>
-            <output id="max-dias-drawdown">Maximo dias en drawdown</output>
-          </div>
-
-
-
-          <div>
-            <label for="total-target">TOTAL TARGETS</label>
-            <output id="total-target">Total targets</output>
-          </div>
-
-          <div>
-            <label for="total-stops">TOTAL STOPS</label>
-            <output id="total-stops">Total stops</output>
-          </div>
-
-          <div>
-            <label for="diff-target-stops">SUBTOTAL</label>
-            <output id="diff-target-stops">Subtotal</output>
-          </div>
-
-          <div>
-            <label for="total-comision">TOTAL COMISIONES</label>
-            <output id="total-comision">Total comisiones</output>
-          </div>
-
-          <div>
-            <label for="resultado-final">RESULTADO FINAL</label>
-            <output id="resultado-final">Resultado final</output>
-          </div>
-        </div>
-        <div id="indicador-resumen"></div>
-      </section>
-
-      <section class="secciones seccion-grafica">
-        <div class="titulo-secciones"><h2>GRAFICA</h2></div>
-        <canvas id="myChart"></canvas>
-      </section>
-
-      <section class="secciones seccion-tabla">
-        <table class="contenido-tabla">
-          <thead id="tabla-encabezado">
-            <tr>
-              <th>ID</th>
-              <th>RESULTADO</th>
-              <th>COMISION</th>
-              <th>SUBTOTAL</th>
-              <th>ACUMULADO</th>
-              <th>DRAWDOWN</th>
-              <th>+ / -</th>
-            </tr>
-          </thead>
-          <tbody id="tabla-cuerpo"></tbody>
-        </table>
-      </section>
-    </div> -->
+    
 
 
     
