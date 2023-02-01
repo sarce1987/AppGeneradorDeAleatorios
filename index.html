@@ -198,7 +198,7 @@
               </div>
               <div class="esperanza-mat">Esperanza matematica: <span id="esperanza-matematica">2.54</span></div>
             </div>
-            <div class="contenedor-resultado-simulacion-negativo">Sistema exitoso</div>
+            <div id="contenedor-resultado-simulacion"></div>
           </div>
           <!--CONTENEDOR DE RACHAS Y DRAWDOWN-->
           <div class="contenedor-rachas-drawdown">
@@ -240,11 +240,11 @@
               <div class="contenedor-info-totales">
                 <div class="contenedor-totales">
                   <output id="total-targets">$1500,00</output>
-                  <label>total target</label>
+                  <label>target</label>
                 </div>
                 <div class="contenedor-totales">
                   <output id="total-stops">$1500,00</output>
-                  <label>total stop</label>
+                  <label>stop</label>
                 </div>
                 <div class="contenedor-totales">
                   <output id="diff-target-stops">$1500,00</output>
@@ -252,7 +252,7 @@
                 </div>
                 <div class="contenedor-totales">
                   <output id="total-comision">$1500,00</output>
-                  <label>total comisiones</label>
+                  <label>comisiones</label>
                 </div>
               </div>
               <div class="contenedor-info-resultado-final">
@@ -268,7 +268,7 @@
           <div class="contenedor contenedor-acumulado">
             <div class="contenedor-titulo"><h2>Acumulado</h2></div>
             <div class="contenedor-info">
-              Aca estaria la grafica de acumulado
+              <canvas id="acumuladoChart"></canvas>
             </div>
           </div>
           <!--CONTENEDOR DE TABLA -->
@@ -288,39 +288,43 @@
                   </tr>
                 </thead>
                   
-                <tbody id="tabla-cuerpo"></tbody>
-                <tr class="fila-positiva">
-                  <td>1</td>
-                  <td>75</td>
-                  <td>1</td>
-                  <td>74</td>
-                  <td>74</td>
-                  <td>0</td>
-                  <td>POSITIVO</td>
-                </tr>
-                <tr class="fila-negativa">
-                  <td>1</td>
-                  <td>75</td>
-                  <td>1</td>
-                  <td>74</td>
-                  <td>74</td>
-                  <td>0</td>
-                  <td>POSITIVO</td>
-                </tr>
-                <tr>
-                  <td>1</td>
-                  <td>75</td>
-                  <td>1</td>
-                  <td>74</td>
-                  <td>74</td>
-                  <td>0</td>
-                  <td>POSITIVO</td>
-                </tr>
+                <tbody id="tabla-cuerpo">
+                  <tr class="fila-positiva">
+                    <td>1</td>
+                    <td>75</td>
+                    <td>1</td>
+                    <td>74</td>
+                    <td>74</td>
+                    <td>0</td>
+                    <td>POSITIVO</td>
+                  </tr>
+                  <tr class="fila-negativa">
+                    <td>1</td>
+                    <td>75</td>
+                    <td>1</td>
+                    <td>74</td>
+                    <td>74</td>
+                    <td>0</td>
+                    <td>POSITIVO</td>
+                  </tr>
+                  <tr>
+                    <td>1</td>
+                    <td>75</td>
+                    <td>1</td>
+                    <td>74</td>
+                    <td>74</td>
+                    <td>0</td>
+                    <td>POSITIVO</td>
+                  </tr>
+                </tbody>
+                
               </table>
             </div>
           </div>
         </div>
       </div>
+
+      
     </section>
 
     <footer class="footer">este es el pie de pagina</footer>
@@ -498,6 +502,8 @@
       </section>
     </div> -->
 
+
+    
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/ElmntHTML.js"></script>

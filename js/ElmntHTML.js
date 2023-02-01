@@ -29,6 +29,6 @@ class ElmntHTML {
   static cuerpoTabla = document.getElementById('tabla-cuerpo');
   
   //Graficos
-  static grafico = document.getElementById('myChart');
+  static graficoAcumulado = document.getElementById('acumuladoChart');
   static graficoEfectividad = document.getElementById('efectividadChart');
 }

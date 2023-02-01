@@ -270,7 +270,7 @@ footer{
   color: var(--color-negativo);
 }
 
-/*SECCION DE RESULTADOS DE SIMULACION*/
+/*-----SECCION DE RESULTADOS DE SIMULACION------*/
 
 .seccion-lista-simulaciones .contenedor-info{
   /*FLEX*/
@@ -280,15 +280,19 @@ footer{
 
 }
 
+.contenedor-titulo span{
+  color: rgb(223, 160, 82);
+}
 
 
 /*CONTENEDOR ESTADISTICAS*/
 
 .contenedor-estadisticas{
   width: 350px;
-
-
+  flex-grow: 1;
+  order: 1;
 }
+
 .contenedor-estadisticas .contenedor-info{
   /*FLEX*/
   display: flex;
@@ -361,6 +365,8 @@ footer{
   width: 350px;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
+  order: 2;
 }
 .contenedor-rachas-drawdown .contenedor{
   height: 50%;
@@ -397,36 +403,46 @@ footer{
 }
 
 /*CONTENEDOR MONETARIO*/
+.contenedor-monetario{
+  flex-grow: 1;
+  order: 4;
+}
  .contenedor-monetario .contenedor-info{
   /*FLEX*/
   display: flex;
   flex-direction: column;
   justify-content: center;
+  flex-grow: 1;
 }
 .contenedor-info-totales{
   width: 100%;
   /*FLEX*/
- 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
 
-.contenedor-info-resultado-final{
-  height: 50%;
-  /*FLEX*/
-  flex-grow: 1;
-}
+
 .contenedor-totales{
+  width: 20%;
   background-color:  #286cff0a;
   margin: 5px;
+  padding: 0 15px 0;
   /*FLEX*/
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   align-items: center;
+}
+
+.contenedor-info-resultado-final .contenedor-totales{
+  width: 100%;
   
+ 
+}
+.contenedor-info-resultado-final .contenedor-totales output{
+  font-size: var(--tamaño-letra-xl);
 }
 #total-targets{
   color: var(--color-positivo);
@@ -437,27 +453,44 @@ footer{
 #total-comision{
   color: var(--color-negativo);
 }
-#resultado-final{
-  font-size: var(--tamaño-letra-xxl);
+.resultado-final-positivo{
+  color: var(--color-positivo);
+}
+.resultado-final-negativo{
+  color: var(--color-negativo);
 }
 .contenedor-totales output{
-  margin: 10px;
-  font-size: var(--tamaño-letra-x);
+  margin: 20px 0 10px 0;
+  font-size: var(--tamaño-letra-l);
 }
 .contenedor-totales label{
-  margin: 10px;
+  margin-bottom: 10px;
   font-size: var(--tamaño-letra-m);
   text-transform: uppercase;
+  text-align: center;
 }
 
 /*CONTENEDOR ACUMULADO*/
 .contenedor-acumulado{
+  width: 450px;
+  flex-grow: 1;
+  order: 3;
+}
+.contenedor-acumulado .contenedor-info{
+  height: 80%;
+  justify-content: center;
+  align-items: center;
+}
+#acumuladoChart{
+  width: 100%;
+  height: auto;
 
 }
 
 /*CONTENEDOR TABLA*/
 .contenedor-tabla{
   width: 100%;
+  order: 5;
 }
 .contenido-tabla {
   border-collapse: collapse;

@@ -1,7 +1,10 @@
 /**
  * Al arrancar el programa
  */
-ElmntHTML.body.onload = mostrarGraficoEfectividadInicio;
+ElmntHTML.body.onload = mostrarGraficoAcumulado;
+//ElmntHTML.body.onclick = mostrarGraficoEfectividadInicio;
+
+console.log(formatoPorcentaje(0.54654656));
 
 /**
  * Seteo de valores de configuracion a traves de los valores del imput
@@ -15,6 +18,7 @@ function Config() {
     comisionPorTrade: parseFloat(ElmntHTML.comisionPorTrade.value),
     ratioGP: parseFloat(this.montoTakeProfit / this.montoStopLoss),
     efectividad: parseFloat(ElmntHTML.efectividad.value),
+    numDeSimulaciones: Number(ElmntHTML.numDeSimulaciones.value),
   };
 }
 
@@ -145,18 +149,199 @@ function crearSimulacion() {
     document.getElementById("btn-msj-err").innerHTML = error.message;
     throw new Error();
   }
+
+  //Creamos un arreglo de simulacionesResultados a partir de ese podemos sacar todos los datos
+  const simulacionesResultados = [];
   const simulacion = new Simulacion();
+  for (let i = 0; i < Config().numDeSimulaciones; i++) {
+    simulacionesResultados.push(
+      new SimulacionResultados(simulacion.listaTrades())
+    );
+  }
+  console.log(simulacionesResultados);
+  mostrarDatosSeccionListaSimulaciones(simulacionesResultados);
+  crearGraficosEfectividad(simulacionesResultados);
+  crearGraficosAcumulado(simulacionesResultados);
+  comprobarSistema(simulacionesResultados);
+  //crearGraficosEfectividad(simulacionesResultados);
+  /*const simulacion = new Simulacion();
   const listaTrades = simulacion.listaTrades();
   const simulacionResultados = new SimulacionResultados(listaTrades);
 
   mostrarResultados(simulacionResultados);
   mostrarTabla(listaTrades);
   /*mostrarGrafico(listaTrades);*/
-  mostrarGraficoEfectividad(simulacionResultados);
+  /*mostrarGraficoEfectividad(simulacionResultados);*/
 
-  console.log(simulacionResultados.esperanzaMatematica());
+  /* console.log(simulacionResultados.esperanzaMatematica());
   console.log(simulacionResultados.gananciaPromedio());
-  console.log(simulacionResultados.perdidaPromedio());
+  console.log(simulacionResultados.perdidaPromedio());*/
+}
+
+/*CREAMOS COMO SE MUESTRAN LOS DATOS CON CODIGO HTML PARA PODER REPETIR */
+function mostrarDatosSeccionListaSimulaciones(simulacionesResultados) {
+  let codigoHTML = "";
+  let i = 0;
+  for (const result of simulacionesResultados) {
+    codigoHTML += `<div class="contenedor">
+    <div class="contenedor-titulo">
+      <h2>SIMULACION <span>n°${++i}</span></h2>
+    </div>
+    <div class="contenedor-info">
+      <!--CONTENEDOR DE ESTADISTICAS-->
+      <div class="contenedor contenedor-estadisticas">
+        <div class="contenedor-titulo"><h2>Estadisticas</h2></div>
+        <div class="contenedor-info">
+  
+          <table class="contenido-tabla">
+            <thead id="tabla-encabezado">
+              <tr>
+                <th>n°targets</th>
+                <th>n°stops</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-cuerpo"></tbody>
+            <tr>
+              <td id="val-1">${result.numTargets()}</td>
+              <td id="val-2">${result.numStopsLoss()}</td>
+            </tr>
+           
+          </table>
+         
+          <div class="contenedor-grafica-efectividad">
+            <div class="centro-grafico">
+              <div id="centro-efectividad">${formatoPorcentaje(
+                result.efectividad()
+              )}</div>
+              <div id="centro-ratio">${Math.abs(
+                ElmntHTML.montoTakeProfit.value / ElmntHTML.montoStopLoss.value
+              ).toFixed(2) } : 1</div>
+            </div>
+            
+            <div><canvas id="efectividadChart-${i}" ></canvas></div>
+          </div>
+          <div class="esperanza-mat">Esperanza matematica: <span id="esperanza-matematica">${result
+            .esperanzaMatematica()
+            .toFixed(2)}</span></div>
+        </div>
+        <div id="contenedor-resultado-simulacion-${i}">${result.comprobarSistemaDeTrading()}</div>
+      </div>
+      <!--CONTENEDOR DE RACHAS Y DRAWDOWN-->
+      <div class="contenedor-rachas-drawdown">
+        <div class="contenedor contenedor-rachas">
+          <div class="contenedor-titulo"><h2>RACHAS</h2></div>
+          <div class="contenedor-info">
+            <table class="tabla-simple">
+              <tr>
+                <th>racha positiva</th>
+                <td class="fila-positiva">${result.maxRachaPositiva()}</td>
+              </tr>
+              <tr>
+                <th>racha negativa</th>
+                <td class="fila-negativa">${result.maxRachaNegativa()}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="contenedor contenedor-drawdown">
+          <div class="contenedor-titulo"><h2>DRAWDOWN</h2></div>
+          <div class="contenedor-info">
+            <table class="tabla-simple">
+              <tr>
+                <th>maximo drawdown</th>
+                <td class="fila-negativa">${formatoMoneda(
+                  result.maxDrawdown()
+                )}</td>
+              </tr>
+              <tr>
+                <th>max dias en drawdown</th>
+                <td class="fila-negativa">${
+                  result.maxDiasEnDrawdown() + " dias"
+                }</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!--CONTENEDOR MONETARIO-->
+      <div class="contenedor contenedor-monetario">
+        <div class="contenedor-titulo"><h2>Monetario</h2></div>
+        <div class="contenedor-info">
+          <div class="contenedor-info-totales">
+            <div class="contenedor-totales">
+              <output id="total-targets">${formatoMoneda(
+                result.montoTakeProfits()
+              )}</output>
+              <label>target</label>
+            </div>
+            <div class="contenedor-totales">
+              <output id="total-stops">${formatoMoneda(
+                result.montoStopLoss()
+              )}</output>
+              <label>stop</label>
+            </div>
+            <div class="contenedor-totales">
+              <output id="diff-target-stops">${formatoMoneda(
+                result.diffTargetStopp()
+              )}</output>
+              <label>subtotal</label>
+            </div>
+            <div class="contenedor-totales">
+              <output id="total-comision">${formatoMoneda(
+                result.totalComisiones()
+              )}</output>
+              <label>comisiones</label>
+            </div>
+          </div>
+          <div class="contenedor-info-resultado-final">
+            <div class="contenedor-totales">
+              <output id="resultado-final-${i}">${formatoMoneda(
+                result.resultadoFinal()
+              )}</output>
+              <label>monto final</label>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <!--CONTENEDOR GRAFICA DE ACUMULADO-->
+      <div class="contenedor contenedor-acumulado">
+        <div class="contenedor-titulo"><h2>Acumulado</h2></div>
+        <div class="contenedor-info">
+          <canvas id="acumuladoChart"></canvas>
+        </div>
+      </div>
+      <!--CONTENEDOR DE TABLA -->
+      <div class="contenedor contenedor-tabla">
+        <div class="contenedor-titulo"><h2>Tabla</h2></div>
+        <div class="contenedor-info">
+          <table class="contenido-tabla">
+            <thead id="tabla-encabezado">
+              <tr>
+                <th>ID</th>
+                <th>RESULTADO</th>
+                <th>COMISION</th>
+                <th>SUBTOTAL</th>
+                <th>ACUMULADO</th>
+                <th>DRAWDOWN</th>
+                <th>+ / -</th>
+              </tr>
+            </thead>
+              
+            <tbody id="tabla-cuerpo">
+              ${mostrarTabla(result.listTrades)}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  }
+  document.getElementsByClassName("seccion-lista-simulaciones")[0].innerHTML =
+    codigoHTML;
+
+
 }
 
 /*
@@ -234,11 +419,18 @@ function mostrarTabla(listaTrades) {
       </tr>`;
     }
   }
-  ElmntHTML.cuerpoTabla.innerHTML = html;
+  return html;
 }
 
 function formatoMoneda(valor) {
   return valor.toLocaleString("en-US", { style: "currency", currency: "USD" });
+}
+
+function formatoPorcentaje(valor) {
+  return valor.toLocaleString(undefined, {
+    style: "percent",
+    minimumFractionDigits: 0,
+  });
 }
 
 function mostrarRatio() {
@@ -247,117 +439,125 @@ function mostrarRatio() {
   ).toFixed(2)} : 1`;
 }
 
+function comprobarSistema(simulacionesResultados) {
+  
+  simulacionesResultados.forEach((simulacionResultado , i)=>{
+    if (simulacionResultado.esperanzaMatematica() > 0) {
+      document.getElementById(`contenedor-resultado-simulacion-${i+1}`).className =
+        "contenedor-resultado-simulacion-positivo";
+      document.getElementById(`resultado-final-${i+1}`)  .className = 'resultado-final-positivo';
+    } else {
+      document.getElementById(`contenedor-resultado-simulacion-${i+1}`).className =
+        "contenedor-resultado-simulacion-negativo";
+        document.getElementById(`resultado-final-${i+1}`)  .className = 'resultado-final-negativo';
+    }
+  })
+
+  
+}
+
 /**
  * Logica para mostrar los datos en una grafica
  */
 
-/*function mostrarGrafico(listaTrades){
-  const ctx = ElmntHTML.grafico;
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-
-}*/
+function crearGraficosAcumulado() {
+  const chartsAcumulado = [];
+  i=0;
+  for (let simulacionResultado of simulacionesResultados){
+    let ctx = document
+      .getElementById(`acumuladoChart-${++i}`)
+      .getContext("2d");
+    let data1 = simulacionResultado.listTrades.map((trade => trade.resultado));
+    let data2 = simulacionResultado.listTrades.map((trade => trade.drawdown));
+    let labels = simulacionResultado.listTrades.map((trade => trade.id));
+    ;
+    grafico = new Chart(ctx, {
+      data: {
+        datasets: [
+          {
+            type: "line",
+            label: "Bar Dataset",
+            data: data1,
+          },
+          {
+            type: "line",
+            label: "Line Dataset",
+            data: data2,
+          },
+        ],
+        labels: labels,
+      },
+      options: {
+        animation: false,
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            enabled: false,
+          },
+        },
+      },
+    });
+    chartsAcumulado.push(grafico);
+  }
+  return chartsAcumulado;
+}
 
 /*GRAFICA DE EFICIENCIA */
-var graficoEfectividad = null;
-function mostrarGraficoEfectividad(simulacionResultados) {
-  const ctx = ElmntHTML.graficoEfectividad;
-  const datos = [
-    simulacionResultados.efectividad() * 100,
-    (1 - simulacionResultados.efectividad()) * 100,
-  ];
 
-  if (graficoEfectividad != null) {
-    graficoEfectividad.destroy();
-  }
+function crearGraficosEfectividad(simulacionesResultados) {
+  const chartsEfectividad = [];
+  let i = 0;
 
-  graficoEfectividad = new Chart(ctx, {
-    type: "doughnut",
-    data: {
-      labels: ["Positivos", "Negativos"],
-      datasets: [
-        {
-          label: "#",
-          data: [55, 45],
-          borderWidth: 1,
+  for (let simulacionResultado of simulacionesResultados) {
+    let ctx = document
+      .getElementById(`efectividadChart-${++i}`)
+      .getContext("2d");
+    let datos = [
+      simulacionResultado.efectividad() * 100,
+      (1 - simulacionResultado.efectividad()) * 100,
+    ];
 
-          backgroundColor: ["#58D68D", "#E74C3C"],
-        },
-      ],
-    },
-    options: {
-      animation: false,
-      plugins: {
-        legend: {
-          display: false,
-        },
-        tooltip: {
-          enabled: false,
-        },
-      },
-    },
-  });
-}
-function mostrarGraficoEfectividadInicio() {
-  const ctx = ElmntHTML.graficoEfectividad.getContext("2d");
-  const datos = [55, 45];
+    //Esto para dar color gradiente a los valores
+    let gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientStroke1.addColorStop(0, "rgba(59, 94, 146 , 1)");
+    gradientStroke1.addColorStop(1, "rgba(88, 126, 155 , 1)");
 
-  if (graficoEfectividad != null) {
-    graficoEfectividad.destroy();
-  }
+    let gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
+    gradientStroke2.addColorStop(0, "rgba(179, 72, 72 , 1)");
+    gradientStroke2.addColorStop(1, "rgba(220, 98, 98, 1)");
 
-  let gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-  gradientStroke1.addColorStop(0, "rgba(59, 94, 146 , 1)");
-  gradientStroke1.addColorStop(1, "rgba(88, 126, 155 , 1)");
-
-  let gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-  gradientStroke2.addColorStop(0, "rgba(179, 72, 72 , 1)");
-  gradientStroke2.addColorStop(1, "rgba(220, 98, 98, 1)");
-
-  graficoEfectividad = new Chart(ctx, {
-    type: "doughnut",
-    data: {
-      labels: ["Positivos", "Negativos"],
-      datasets: [
-        {
-          label: "#",
-          data: datos,
-          borderWidth: 0,
-          backgroundColor:[
-            gradientStroke1,
-            gradientStroke2
+    grafico = new Chart(ctx, {
+      type: "doughnut",
+      data: {
+        labels: ["Positivos", "Negativos"],
+        datasets: [
+          {
+            label: "#",
+            data: datos,
+            backgroundColor: [gradientStroke1, gradientStroke2],
+            borderWidth: 0,
+            borderColor: "#1e2128100",
+          },
         ],
-          borderColor: "#1e2128100",
-        },
-      ],
-    },
-    options: {
-      animation: true,
-      plugins: {
-        legend: {
-          display: false,
-        },
-        tooltip: {
-          enabled: false,
+      },
+      options: {
+        animation: true,
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            enabled: false,
+          },
         },
       },
-    },
-  });
+    });
+
+    chartsEfectividad.push(grafico);
+  }
+
+  return chartsEfectividad;
 }
