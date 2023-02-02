@@ -1,12 +1,12 @@
 :root {
-  --tamaño-letra-xxs: 3px;
-  --tamaño-letra-xs: 5px;
-  --tamaño-letra-s: 10px; /*Usar en textos normales*/
-  --tamaño-letra-m: 15px; /*Usar para subtitulos*/
-  --tamaño-letra-l: 18px; /*Usar para textos de mayor importantcia*/
-  --tamaño-letra-x: 23px; /*Usar para titulos principales*/
-  --tamaño-letra-xl: 30px;
-  --tamaño-letra-xxl: 45px;
+  --tamanio-letra-xxs: 3px;
+  --tamanio-letra-xs: 5px;
+  --tamanio-letra-s: 10px; /*Usar en textos normales*/
+  --tamanio-letra-m: 15px; /*Usar para subtitulos*/
+  --tamanio-letra-l: 18px; /*Usar para textos de mayor importantcia*/
+  --tamanio-letra-x: 23px; /*Usar para titulos principales*/
+  --tamanio-letra-xl: 30px;
+  --tamanio-letra-xxl: 45px;
 
   
 
@@ -40,7 +40,7 @@ body {
 }
 .seccion-titulo-principal{
   background-color: rgba(0, 0, 0, 0.30);
-  font-size: var(--tamaño-letra-x);
+  font-size: var(--tamanio-letra-x);
   text-align: center;
   padding: 10px;
 }
@@ -66,7 +66,7 @@ body {
 .contenedor-titulo{
   background-color: rgba(0, 0, 0 , 0.25);
   text-transform: uppercase;
-  font-size: var(--tamaño-letra-m);
+  font-size: var(--tamanio-letra-m);
   padding: 15px ;
   text-align: center;
 }
@@ -105,7 +105,7 @@ body {
   border-radius: 6px 0 0 6px ;
   border: 1px solid var(--color-input-off);
   margin: 5px 0;
-  font-size: var(--tamaño-letra-m);
+  font-size: var(--tamanio-letra-m);
   font-weight: bold;
   display: flex;
   justify-content: center;
@@ -123,7 +123,7 @@ body {
   padding: 10px;
   margin: 5px 0;
   font-family: "Montserrat", sans-serif;
-  font-size: var(--tamaño-letra-m);
+  font-size: var(--tamanio-letra-m);
   color: var(--color-letra);
   text-align: center;
 }
@@ -230,7 +230,7 @@ body {
 	height: 40px;
 	background: #141414;
 	color: var(--color-letra);
-	font-size: var(--tamaño-letra-l);
+	font-size: var(--tamanio-letra-l);
 	font-weight: 500;
   font-family: "Montserrat", sans-serif;
 	border: none;
@@ -331,7 +331,7 @@ body {
   transform: translate(-50%, -50%)
 }
 #centro-efectividad{
-  font-size: var(--tamaño-letra-x);
+  font-size: var(--tamanio-letra-x);
 }
 
 .esperanza-mat{
@@ -341,7 +341,7 @@ body {
 .contenedor-resultado-simulacion-positivo{
   background-color: var(--color-positivo);
   color: #141414;
-  font-size: var(--tamaño-letra-l);
+  font-size: var(--tamanio-letra-l);
   text-transform: uppercase;
   width: 100%;
   text-align: center;
@@ -350,7 +350,7 @@ body {
 .contenedor-resultado-simulacion-negativo{
   background-color: var(--color-negativo);
   color: #141414;
-  font-size: var(--tamaño-letra-l);
+  font-size: var(--tamanio-letra-l);
   text-transform: uppercase;
   width: 100%;
   text-align: center;
@@ -378,7 +378,7 @@ body {
 }
 .tabla-simple tr{
   border-bottom: 1px solid rgba(130, 130, 235, 0.253);
-  font-size: var(--tamaño-letra-m);
+  font-size: var(--tamanio-letra-m);
   
 }
 .tabla-simple th{
@@ -447,7 +447,7 @@ body {
  
 }
 .contenedor-info-resultado-final .contenedor-totales output{
-  font-size: var(--tamaño-letra-xl);
+  font-size: var(--tamanio-letra-xl);
 }
 #total-targets{
   color: var(--color-positivo);
@@ -466,11 +466,11 @@ body {
 }
 .contenedor-totales output{
   margin: 20px 0 10px 0;
-  font-size: var(--tamaño-letra-l);
+  font-size: var(--tamanio-letra-l);
 }
 .contenedor-totales label{
   margin-bottom: 10px;
-  font-size: var(--tamaño-letra-m);
+  font-size: var(--tamanio-letra-m);
   text-transform: uppercase;
   text-align: center;
 }
@@ -549,7 +549,7 @@ body {
 .btn-ampliar{
   width: 30px;
   height: 30px;
-  font-size: var(--tamaño-letra-l);
+  font-size: var(--tamanio-letra-l);
   color: var(--color-letra);
   border: none;
   border-radius: 3px;
@@ -566,10 +566,10 @@ footer{
   background-color: rgba(77, 125, 179, 0.3);
   text-align: center;
   padding: 10px;
-  width: 100%;
+  /*width: 100%;*/
 }
 
 /*Copyright*/
 #copyright{
-  font-size: var(--tamaño-letra-s);
+  font-size: var(--tamanio-letra-s);
 }
