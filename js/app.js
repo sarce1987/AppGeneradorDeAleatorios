@@ -1,12 +1,12 @@
-/**
- * Al arrancar el programa
- */
-//ElmntHTML.body.onclick = mostrarGraficoEfectividadInicio;
+/**Ocultar listado de simulacion al cargar la pagina y mostrarlo despues de apretar el boton simular */
+ElmntHTML.body.onload = () =>{
+  document.getElementsByClassName('seccion-lista-simulaciones')[0].style.display = 'none';
+}
+function cargarListadoSimulacion(){
+  document.getElementsByClassName('seccion-lista-simulaciones')[0].style.display = 'block';
+}
 
 
-/**
- * Seteo de valores de configuracion a traves de los valores del imput
- */
 
 function Config() {
   return {
@@ -120,6 +120,9 @@ function validar(elementoHTML) {
   }
 }
 
+/**
+ * Esta funcion se fija si todos los campos de input son validos
+ */
 function comprobarErrorInput() {
   let i = 0;
   err.forEach((e) => {
@@ -156,24 +159,11 @@ function crearSimulacion() {
       new SimulacionResultados(simulacion.listaTrades())
     );
   }
-  console.log(simulacionesResultados);
   mostrarDatosSeccionListaSimulaciones(simulacionesResultados);
   crearGraficosEfectividad(simulacionesResultados);
   crearGraficosAcumulado(simulacionesResultados);
   comprobarSistema(simulacionesResultados);
-  //crearGraficosEfectividad(simulacionesResultados);
-  /*const simulacion = new Simulacion();
-  const listaTrades = simulacion.listaTrades();
-  const simulacionResultados = new SimulacionResultados(listaTrades);
-
-  mostrarResultados(simulacionResultados);
-  mostrarTabla(listaTrades);
-  /*mostrarGrafico(listaTrades);*/
-  /*mostrarGraficoEfectividad(simulacionResultados);*/
-
-  /* console.log(simulacionResultados.esperanzaMatematica());
-  console.log(simulacionResultados.gananciaPromedio());
-  console.log(simulacionResultados.perdidaPromedio());*/
+  cargarListadoSimulacion();
 }
 
 /*CREAMOS COMO SE MUESTRAN LOS DATOS CON CODIGO HTML PARA PODER REPETIR */
@@ -341,52 +331,8 @@ function mostrarDatosSeccionListaSimulaciones(simulacionesResultados) {
 }
 
 /*
-Mediantes las siguientes funciones mostramos los resultados por pantalla
+Generacion de tablas html mediante un listado de trades
 */
-
-function mostrarResultados(simulacionResultados) {
-  ElmntHTML.numTargets.innerHTML = simulacionResultados.numTargets();
-  ElmntHTML.numStopsLoss.innerHTML = simulacionResultados.numStopsLoss();
-  ElmntHTML.efectividadSistema.innerHTML = (
-    simulacionResultados.efectividad() * 100
-  ).toFixed(2);
-  ElmntHTML.maxRachaPositiva.innerHTML =
-    simulacionResultados.maxRachaPositiva();
-  ElmntHTML.maxRachaNegativa.innerHTML =
-    simulacionResultados.maxRachaNegativa();
-  ElmntHTML.maxDrawdown.innerHTML = formatoMoneda(
-    simulacionResultados.maxDrawdown()
-  );
-  ElmntHTML.totalComisiones.innerHTML = formatoMoneda(
-    simulacionResultados.totalComisiones()
-  );
-  ElmntHTML.totalStopsLoss.innerHTML = formatoMoneda(
-    simulacionResultados.montoStopLoss()
-  );
-  ElmntHTML.totalTakeProfit.innerHTML = formatoMoneda(
-    simulacionResultados.montoTakeProfits()
-  );
-  ElmntHTML.diffTargetStopp.innerHTML = formatoMoneda(
-    simulacionResultados.diffTargetStopp()
-  );
-  ElmntHTML.resultadoFinal.innerHTML = formatoMoneda(
-    simulacionResultados.resultadoFinal()
-  );
-  ElmntHTML.maxDiasEnDrawdown.innerHTML =
-    simulacionResultados.maxDiasEnDrawdown();
-
-  /*Con esto comprobamos si el sistema de trading es positivo o negativo y lo mostramos en 
-  pantalla */
-  if (simulacionResultados.esperanzaMatematica() > 0) {
-    ElmntHTML.indicadorResumen.className = "positivo";
-    ElmntHTML.indicadorResumen.innerHTML =
-      simulacionResultados.comprobarSistemaDeTrading();
-  } else {
-    ElmntHTML.indicadorResumen.className = "negativo";
-    ElmntHTML.indicadorResumen.innerHTML =
-      simulacionResultados.comprobarSistemaDeTrading();
-  }
-}
 
 function mostrarTabla(listaTrades) {
   let html = "";
@@ -418,6 +364,10 @@ function mostrarTabla(listaTrades) {
   return html;
 }
 
+/**
+ * Funciones para formatear los valores
+ */
+
 function formatoMoneda(valor) {
   return valor.toLocaleString("en-US", { style: "currency", currency: "USD" });
 }
@@ -429,26 +379,29 @@ function formatoPorcentaje(valor) {
   });
 }
 
+/**
+ * Ratio para el output dentro del listado de inputs
+ */
 function mostrarRatio() {
   ElmntHTML.ratioGP.value = `${Math.abs(
     ElmntHTML.montoTakeProfit.value / ElmntHTML.montoStopLoss.value
   ).toFixed(2)} : 1`;
 }
 
+/**
+ * Esta funcion comprueba si el sistema de trading es rentable o no.
+ * Determina si la esperanza matematica del sistema es positiva y en vase a eso
+ * cambia las clases 
+ */
 function comprobarSistema(simulacionesResultados) {
   simulacionesResultados.forEach((simulacionResultado, i) => {
     if (simulacionResultado.esperanzaMatematica() > 0) {
-      document.getElementById(
-        `contenedor-resultado-simulacion-${i + 1}`
-      ).className = "contenedor-resultado-simulacion-positivo";
-      document.getElementById(`resultado-final-${i + 1}`).className =
-        "resultado-final-positivo";
-    } else {
-      document.getElementById(
-        `contenedor-resultado-simulacion-${i + 1}`
-      ).className = "contenedor-resultado-simulacion-negativo";
-      document.getElementById(`resultado-final-${i + 1}`).className =
-        "resultado-final-negativo";
+      document.getElementById(`contenedor-resultado-simulacion-${i + 1}`).className = "contenedor-resultado-simulacion-positivo";
+      document.getElementById(`resultado-final-${i + 1}`).className ="resultado-final-positivo";
+    } 
+    else {
+      document.getElementById(`contenedor-resultado-simulacion-${i + 1}`).className = "contenedor-resultado-simulacion-negativo";
+      document.getElementById(`resultado-final-${i + 1}`).className ="resultado-final-negativo";
     }
   });
 }
@@ -470,13 +423,14 @@ function crearGraficosAcumulado(simulacionesResultados) {
         datasets: [
           {
             type: "line",
-            label: "Bar Dataset",
+            label: "Trades",
             data: data1,
           },
           {
             type: "line",
-            label: "Line Dataset",
+            label: "Drawdown",
             data: data2,
+            fill: true,
           },
         ],
         labels: labels,
@@ -489,6 +443,11 @@ function crearGraficosAcumulado(simulacionesResultados) {
           },
           tooltip: {
             enabled: false,
+          },
+        },
+        elements: {
+          point: {
+            radius: 0,
           },
         },
       },
@@ -556,29 +515,18 @@ function crearGraficosEfectividad(simulacionesResultados) {
 }
 
 /*Boton de la tabla */
-let showMore = document.getElementById("show-more");
-let showLess = document.getElementById("show-less-1");
-
-showMore.addEventListener("click", function () {
-  let table = document.getElementById("tabla-operaciones-1");
-  let rows = table.querySelectorAll("tbody tr");
-
-  
-  for (let i = 10; i < rows.length; i++) {
-    rows[i].style.display = "table-row";
-  }
-  showMore.style.display = "none";
-});
 
 
-function ocultarMostrarTabla(i){
-  btn = document.getElementById(`show-less-more-${i}`)
-  elmnt = document.getElementById(`tabla-operaciones-${i}`)
-  if(elmnt.classList.contains('tabla-retraida')){
+function ocultarMostrarTabla(i) {
+  btn = document.getElementById(`show-less-more-${i}`);
+  elmnt = document.getElementById(`tabla-operaciones-${i}`);
+  if (elmnt.classList.contains("tabla-retraida")) {
     elmnt.classList.remove("tabla-retraida");
-    btn.innerHTML = '-';
-  }else{
+    btn.innerHTML = "-";
+    tableElement = document.activeElement; //Guarda la posicion en la pagina
+  } else {
     elmnt.classList.add("tabla-retraida");
-    btn.innerHTML = '+'
+    btn.innerHTML = "+";
+    tableElement.scrollIntoView(); // Vamos a la posicion en la pagina
   }
 }
