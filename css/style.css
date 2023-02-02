@@ -200,6 +200,10 @@ body {
    /* flex-flow: column wrap;*/
     justify-items: center;
   }
+  /*Analizar esta linea*/
+  .seccion-lista-simulaciones{
+    width:100%;
+  }
  
  
   .contenedor-inputs, 
