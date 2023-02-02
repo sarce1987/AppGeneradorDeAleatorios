@@ -29,21 +29,14 @@ class Simulacion{
 
     //Generacion del drawdown
     let max = 0;
-    let aux = [];
+    let aux = [0];
 
     for (let i = 0; i < trades.length; i++) {
-      if (i == 0 && trades[0].resultado >= 0) {
-        trades[0].drawdown = 0;
-        aux.push(trades[i].acumulado);
-      } else if (i == 0 && trades[0].resultado < 0) {
-        trades[0].drawdown = trades[0].acumulado;
-        aux.push(trades[i].acumulado);
-      } else {
         aux.push(trades[i].acumulado);
         max = Math.max(...aux);
         trades[i].drawdown = (trades[i].acumulado - max);
-      }
     }
+
    return trades;
   }
 }

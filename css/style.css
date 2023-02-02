@@ -44,12 +44,7 @@ body {
 .seccion-titulo-principal span {
   color: rgb(223, 160, 82);
 }
-footer{
-  background-color: rgba(0, 0, 0, 0.30);
-  font-size: var(--tamaño-letra-x);
-  text-align: center;
-  padding: 10px;
-}
+
 
 .seccion-principal{
 
@@ -563,3 +558,14 @@ footer{
   cursor: pointer;
 }
 
+
+footer{
+  background-color: rgba(77, 125, 179, 0.3);
+  text-align: center;
+  padding: 10px;
+}
+
+/*Copyright*/
+#copyright{
+  font-size: var(--tamaño-letra-s);
+}

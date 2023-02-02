@@ -530,3 +530,5 @@ function ocultarMostrarTabla(i) {
     tableElement.scrollIntoView(); // Vamos a la posicion en la pagina
   }
 }
+
+
