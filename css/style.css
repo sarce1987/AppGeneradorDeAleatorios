@@ -34,6 +34,9 @@ body {
   background: radial-gradient(circle at 10% 20%, rgb(90, 92, 106) 0%, rgb(32, 45, 58) 81.3%);
   color: var(--color-letra);
   position: relative;
+  /*FLEX*/
+  display: flex;
+  flex-flow: column wrap;
 }
 .seccion-titulo-principal{
   background-color: rgba(0, 0, 0, 0.30);
@@ -194,15 +197,15 @@ body {
   .seccion-principal,
   .seccion-lista-simulaciones .contenedor .contenedor-info
   {
-    flex-flow: column wrap;
+   /* flex-flow: column wrap;*/
     justify-items: center;
   }
  
  
   .contenedor-inputs, 
-  .contenedor-instrucciones,
-  .seccion-lista-simulaciones .contenedor .contenedor-info .contenedor,
-  .seccion-lista-simulaciones .contenedor .contenedor-info .contenedor-rachas-drawdown
+  .contenedor-instrucciones
+  /*.seccion-lista-simulaciones .contenedor .contenedor-info .contenedor
+  .seccion-lista-simulaciones .contenedor .contenedor-info .contenedor-rachas-drawdown*/
   {
     width: 100%;
   }
@@ -563,6 +566,7 @@ footer{
   background-color: rgba(77, 125, 179, 0.3);
   text-align: center;
   padding: 10px;
+  width: 100%;
 }
 
 /*Copyright*/
