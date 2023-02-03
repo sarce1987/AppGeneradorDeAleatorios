@@ -1,10 +1,10 @@
 /**Ocultar listado de simulacion al cargar la pagina y mostrarlo despues de apretar el boton simular */
-/*ElmntHTML.body.onload = () =>{
+ElmntHTML.body.onload = () =>{
   document.getElementsByClassName('seccion-lista-simulaciones')[0].style.display = 'none';
 }
 function cargarListadoSimulacion(){
   document.getElementsByClassName('seccion-lista-simulaciones')[0].style.display = 'block';
-}*/
+}
 
 
 
