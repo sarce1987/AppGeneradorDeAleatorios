@@ -17,6 +17,8 @@ function Config() {
     ratioGP: parseFloat(this.montoTakeProfit / this.montoStopLoss),
     efectividad: parseFloat(ElmntHTML.efectividad.value),
     numDeSimulaciones: Number(ElmntHTML.numDeSimulaciones.value),
+    setMaxNumTrades: 3000,
+    setMaxNumSimmulaciones: 30
   };
 }
 
@@ -34,11 +36,18 @@ function validar(elementoHTML) {
       document.getElementById("msj-error-1").innerHTML =
         "*El valor no puede ser nulo o estar vacio";
       err[0] = 1;
+    } else if (elementoHTML.value > Config().setMaxNumTrades){
+      document.getElementById("input-1").classList.remove("input-valido");
+      document.getElementById("input-1").classList.add("input-no-valido");
+      document.getElementById("msj-error-1").innerHTML =
+        "*Maximo valor permitido "+Config().setMaxNumTrades;
+      err[0] = 1;
     } else {
       document.getElementById("input-1").classList.remove("input-no-valido");
       document.getElementById("input-1").classList.add("input-valido");
       err[0] = 0;
     }
+    
   }
 
   if (elementoHTML.id == "monto-stoplost") {
@@ -112,11 +121,20 @@ function validar(elementoHTML) {
       document.getElementById("msj-error-6").innerHTML =
         "*El valor debe ser un numero entero mayor a 0";
       err[5] = 1;
-    } else {
+    } else if (
+      elementoHTML.value > Config().setMaxNumSimmulaciones
+    ) {
+      document.getElementById("input-6").classList.remove("input-valido");
+      document.getElementById("input-6").classList.add("input-no-valido");
+      document.getElementById("msj-error-6").innerHTML =
+        "*Maximo valor permitido " + Config().setMaxNumSimmulaciones;
+      err[5] = 1;
+    }  else {
       document.getElementById("input-6").classList.remove("input-no-valido");
       document.getElementById("input-6").classList.add("input-valido");
       err[5] = 0;
     }
+    
   }
 }
 
