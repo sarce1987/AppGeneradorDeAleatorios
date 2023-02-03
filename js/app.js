@@ -1,10 +1,10 @@
 /**Ocultar listado de simulacion al cargar la pagina y mostrarlo despues de apretar el boton simular */
-ElmntHTML.body.onload = () =>{
+/*ElmntHTML.body.onload = () =>{
   document.getElementsByClassName('seccion-lista-simulaciones')[0].style.display = 'none';
 }
 function cargarListadoSimulacion(){
   document.getElementsByClassName('seccion-lista-simulaciones')[0].style.display = 'block';
-}
+}*/
 
 
 
@@ -296,7 +296,7 @@ function mostrarDatosSeccionListaSimulaciones(simulacionesResultados) {
       <div class="contenedor contenedor-acumulado">
         <div class="contenedor-titulo"><h2>Acumulado</h2></div>
         <div class="contenedor-info">
-          <canvas id="acumuladoChart-${i}"></canvas>
+          <canvas id="acumuladoChart-${i}" width="100%"></canvas>
         </div>
       </div>
       <!--CONTENEDOR DE TABLA -->

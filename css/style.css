@@ -205,7 +205,6 @@ body {
     width:100%;
   }
  
- 
   .contenedor-inputs, 
   .contenedor-instrucciones
   /*.seccion-lista-simulaciones .contenedor .contenedor-info .contenedor
@@ -213,11 +212,6 @@ body {
   {
     width: 100%;
   }
-  
-  
-
-
-
 }
 
 
@@ -424,9 +418,6 @@ body {
   flex-wrap: wrap;
 }
 
-
-
-
 .contenedor-totales{
   width: 20%;
   background-color:  #286cff0a;
@@ -439,17 +430,15 @@ body {
   align-items: center;
 }
 
-@media screen and (max-width: 600px){
-  .contenedor-totales{
-    width: 100%;
-  }
-}
 
-.contenedor-info-resultado-final .contenedor-totales{
+.contenedor-info-resultado-final{
   width: 100%;
-  
- 
+  display: flex;
 }
+/*.contenedor-info-resultado-final .contenedor-totales{
+  width: 100%;
+}*//*Borrar*/
+
 .contenedor-info-resultado-final .contenedor-totales output{
   font-size: var(--tamanio-letra-xl);
 }
@@ -576,4 +565,16 @@ footer{
 /*Copyright*/
 #copyright{
   font-size: var(--tamanio-letra-s);
+}
+
+
+@media screen and (max-width: 600px){
+  .contenedor-totales,
+  .contenedor-acumulado{
+    width: 100%;
+  }
+
+  .contenedor-info{
+    padding: 10px 10px;
+  }
 }
