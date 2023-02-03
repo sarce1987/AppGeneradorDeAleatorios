@@ -1,5 +1,5 @@
 # AppGeneradorDeAleatorios
-##Conceptos claves
+## Conceptos claves
 Es una herramienta diseñada para que los traders de futuros que realizan scalping puedan simular diferentes escenarios de su sistema de trading y asi determinar
 si el este es rentable o no en el largo plazo.
 Cuando se analiza una estrategia, se debe tener en cuenta la aleatoriedad de las operaciones. Por ejemplo un sistema de trading que tiene una efectividad del 60%
