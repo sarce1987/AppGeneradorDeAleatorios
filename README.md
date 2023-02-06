@@ -9,6 +9,8 @@ Esas rachas suelen producir efectos psicológicos fuertes en los traders que lo 
 Otro de los aspectos que un trader debe tener en cuenta a la hora de analizar su sistema, es el drawdown. Esto determina un periodo en el cual el trader no genera nuevas
 ganancias. Este periodo puede llegar a ser bastante extenso y debe conocerse su existencia para no entrar en desesperación y mantener la calma a la hora de seguir operando día a día.
 
+Por lo tanto, rachas perdedoras grandes o periodos de drawdown extensos no significan que el sistema sea perdedor
+
 ## ¿Para qué sirve esta herramienta?
 Es una herramienta diseñada para que los traders de futuros que realizan scalping puedan simular diferentes escenarios de su sistema de trading y así poder compáralos para determinar si es rentable o no en el largo plazo.
 
