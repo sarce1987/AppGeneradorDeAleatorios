@@ -46,3 +46,5 @@ Indica el total en términos monetarios. Cuanto se generó en el total de operac
 En este apartado se puede apreciar una tabla con el detalle de cada operación. Esta tabla muestra solo las 4 primeras operaciones, pero puede desplegarse para ver la totalidad de las operaciones.
 
 
+[Abrir App](https://sarce1987.github.io/AppGeneradorDeAleatorios/)
+
